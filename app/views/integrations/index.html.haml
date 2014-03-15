@@ -1,5 +1,17 @@
 %h1 Integration's index
 
-%ul
+%table
+  %tr
+    %th
+      Integration
+    %th
+      Connection Type
+    %th
   - @integrations.each do |integration|
-    %li= link_to integration.title, id: integration.id, action: 'show'
+    %tr
+      %td
+        = integration.title
+      %td
+        = integration.connection_type
+      %td
+        = link_to integration.title, integration_path(integration.id)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303212452) do
+ActiveRecord::Schema.define(version: 20140307001053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,31 @@ ActiveRecord::Schema.define(version: 20140303212452) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "ckeditor_assets", force: true do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "integration_edits", force: true do |t|
+    t.integer  "admin_user_id"
+    t.integer  "integration_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "integration_edits", ["admin_user_id", "integration_id"], name: "index_integration_edits_on_admin_user_id_and_integration_id", using: :btree
+
   create_table "integrations", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -59,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140303212452) do
     t.string   "connection_type",     default: " "
     t.text     "system_requirements", default: " "
     t.text     "custom_instructions", default: " "
+    t.integer  "admin_user_id"
   end
 
 end

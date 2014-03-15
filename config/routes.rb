@@ -2,6 +2,10 @@ CmsSetup::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  root to: 'integrations#index'
+
+  resources :integrations, only: [:index, :show]
+
   match ':controller(/:action(/:id))', :via => [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

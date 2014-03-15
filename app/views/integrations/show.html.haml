@@ -1,7 +1,12 @@
+= content_for :header do
+  = link_to 'Edit Integration', edit_admin_integration_path
+
 %h1 Integration Show
 
-%ul
-  %li= @integration.title
-  %li= @integration.custom_instructions
+%h2
+  = @integration.title
+
+%section
+  = @integration.custom_instructions
 
 
