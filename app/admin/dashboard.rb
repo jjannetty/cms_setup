@@ -6,12 +6,8 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "Recent Edits" do
-          ul do
-            IntegrationEdit.order(:updated_at).last(10) do |edit|
-              li :for => edit do
-                edit.created_at
-              end
-            end
+          IntegrationEdit.order(updated_at: :desc).last(10).map do |edit|
+            render partial: "layouts/recent_edits", locals: {edit: edit}
           end
         end
       end

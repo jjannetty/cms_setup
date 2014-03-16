@@ -240,4 +240,8 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
+  module ActiveAdmin::ViewHelpers
+    include ApplicationHelper
+  end
+
 end

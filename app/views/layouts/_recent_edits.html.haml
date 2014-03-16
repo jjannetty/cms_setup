@@ -1,0 +1,15 @@
+%div.recent-edit
+  - if edit.created_at == edit.updated_at
+    %p
+      %strong= edit.try(:admin_user).try(:email)
+      created
+      %strong= link_to edit.integration.try(:title), edit_admin_integration_path(edit.integration_id)
+      on
+      %strong= edit.created_at.to_formatted_s(:short)
+  - else
+    %p
+      %strong= edit.try(:admin_user).try(:email)
+      updated
+      %strong= link_to edit.integration.try(:title), edit_admin_integration_path(edit.integration_id)
+      on
+      %strong= edit.updated_at.to_formatted_s(:short)

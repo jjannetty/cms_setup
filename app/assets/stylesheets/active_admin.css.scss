@@ -13,5 +13,14 @@
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+.status_tag { background: #6090DB; }
+
+.recent-edit {
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  p {
+    margin: 0;
+  }
+}
